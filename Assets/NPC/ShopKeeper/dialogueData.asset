@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 712b750f75b1ca64886d3cfede966743, type: 3}
-  m_Name: NewNPCDialogue
+  m_Name: dialogueData
   m_EditorClassIdentifier: 
   npcName: ShopKeeper
   npcPortrait: {fileID: 21300000, guid: 6259c5efec3a1874bbbc8245a90d2d68, type: 3}
