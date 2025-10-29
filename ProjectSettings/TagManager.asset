@@ -4,7 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Plot
+  - BoundsConfiner
+  - ItemParent
+  - Fish
+  - CanFish
+  - NPC
   layers:
   - Default
   - TransparentFX
