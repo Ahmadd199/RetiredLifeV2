@@ -1,16 +1,14 @@
 using UnityEngine;
 
-public class Plot
+public class Plot : MonoBehaviour
 {
     public Crop plantedCrop;
 
-    // Check if a crop is planted
     public bool IsEmpty()
     {
         return plantedCrop == null;
     }
 
-    // Plant a crop
     public void PlantCrop(Crop crop)
     {
         if (IsEmpty())
@@ -24,21 +22,21 @@ public class Plot
         }
     }
 
-    // Grow the crop (advance time)
     public void GrowCrop()
     {
         if (!IsEmpty())
-        {
             plantedCrop.Grow();
-        }
     }
 
-    // Harvest the crop
-    public void HarvestCrop()
+    public Crop HarvestCrop()
     {
         if (!IsEmpty() && plantedCrop.Harvest())
         {
-            plantedCrop = null; // clear the plot
+            Crop harvested = plantedCrop;
+            plantedCrop = null;
+            return harvested;
         }
+
+        return null;
     }
 }

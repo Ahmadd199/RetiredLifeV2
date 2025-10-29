@@ -1,25 +1,23 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerFarming : MonoBehaviour
 {
-    private PlotBehaviour nearbyPlot;
+    private Plot nearbyPlot;
 
-    // Called by PlayerInput's Interact action
-    public void OnInteract(InputAction.CallbackContext context)
+    void Update()
     {
-        if (!context.performed) return;
+        if (nearbyPlot == null) return;
 
-        if (nearbyPlot != null)
+        // Plant (P)
+        if (Input.GetKeyDown(KeyCode.P) && nearbyPlot.IsEmpty())
         {
-            if (nearbyPlot.IsEmpty())
-            {
-                nearbyPlot.PlantCrop(new Crop("Wheat", 2));
-            }
-            else
-            {
-                nearbyPlot.HarvestCrop();
-            }
+            nearbyPlot.PlantCrop(new Crop("Wheat", 2));
+        }
+
+        // Harvest (H)
+        if (Input.GetKeyDown(KeyCode.H) && !nearbyPlot.IsEmpty())
+        {
+            nearbyPlot.HarvestCrop();
         }
     }
 
@@ -27,37 +25,16 @@ public class PlayerFarming : MonoBehaviour
     {
         if (other.CompareTag("Plot"))
         {
-            nearbyPlot = other.GetComponent<PlotBehaviour>();
+            nearbyPlot = other.GetComponent<Plot>();
+            Debug.Log("Player is near a plot");
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Plot") && other.GetComponent<PlotBehaviour>() == nearbyPlot)
+        if (other.CompareTag("Plot") && other.GetComponent<Plot>() == nearbyPlot)
         {
             nearbyPlot = null;
         }
     }
-
-    void Update()
-{
-    if (nearbyPlot == null) return;
-
-    // Plant with P
-    if (Input.GetKeyDown(KeyCode.P) && nearbyPlot.IsEmpty())
-    {
-        nearbyPlot.PlantCrop(new Crop("Wheat", 2));
-    }
-
-    // Harvest with H
-    if (Input.GetKeyDown(KeyCode.H) && !nearbyPlot.IsEmpty())
-    {
-        nearbyPlot.HarvestCrop();
-    }
-
-    if (nearbyPlot != null)
-    Debug.Log("Nearby plot detected");
-
-}
-
 }
