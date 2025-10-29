@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 712b750f75b1ca64886d3cfede966743, type: 3}
+  m_Name: NewNPCDialogue
+  m_EditorClassIdentifier: 
+  npcName: ShopKeeper
+  npcPortrait: {fileID: 21300000, guid: 6259c5efec3a1874bbbc8245a90d2d68, type: 3}
+  dialogueLines:
+  - Hello There Adventurer!
+  - Welcome To The Market Place!
+  autoProgressLines: 0100
+  autoProgressDelay: 1.5
+  typingSpeed: 0.05
+  voiceSound: {fileID: 8300000, guid: 606e03a05a3db4c4396e7553d77808cc, type: 3}
+  voicePitch: 1
