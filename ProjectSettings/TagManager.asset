@@ -9,6 +9,7 @@ TagManager:
   - Fish
   - CanFish
   - NPC
+  - Plot
   layers:
   - Default
   - TransparentFX
