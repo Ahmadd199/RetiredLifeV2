@@ -6,7 +6,7 @@ public class FarmingHotbarUI : MonoBehaviour
     public FarmingHotbarSlotUI[] slots;
 
     [Header("Inventory Source")]
-    public Inventory mainInventory; // drag the GameManager Inventory here in Inspector
+    public Inventory mainInventory;
 
     public int SelectedIndex { get; private set; } = 0;
 
@@ -18,7 +18,7 @@ public class FarmingHotbarUI : MonoBehaviour
 
     void Update()
     {
-        // Number keys to select slot
+
         if (Input.GetKeyDown(KeyCode.Alpha1)) SelectSlot(0);
         if (Input.GetKeyDown(KeyCode.Alpha2)) SelectSlot(1);
         if (Input.GetKeyDown(KeyCode.Alpha3)) SelectSlot(2);
@@ -30,7 +30,6 @@ public class FarmingHotbarUI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha9)) SelectSlot(8);
         if (Input.GetKeyDown(KeyCode.Alpha0)) SelectSlot(9);
 
-        // Scroll wheel
         float scroll = Input.mouseScrollDelta.y;
         if (scroll > 0.1f) SelectSlot((SelectedIndex - 1 + slots.Length) % slots.Length);
         if (scroll < -0.1f) SelectSlot((SelectedIndex + 1) % slots.Length);

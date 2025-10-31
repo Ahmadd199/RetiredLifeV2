@@ -48,14 +48,5 @@ public class FarmingInventoryConnector : MonoBehaviour
     if (hotbar != null)
         hotbar.RefreshAllSlots();
 }
-
-      //  if (success)
-       // {
-       //     Debug.Log($"{cropName} added to inventory!");
-            
-          //  FindAnyObjectByType<FarmingHotbarUI>()?.RefreshAllSlots();
-        //}
-       // else
-           // Debug.LogWarning($"Inventory full — Could not add {itemToAdd.itemName}");
     }
 }

@@ -3,41 +3,30 @@ using UnityEngine;
 public class PlayerFarming : MonoBehaviour
 {
     private Plot nearbyPlot;
-    public FarmingHotbarUI hotbarUI; 
     public Inventory inventory;
-
     void Start()
     {
-        if (!hotbarUI) hotbarUI = FindAnyObjectByType<FarmingHotbarUI>();
         if (!inventory) inventory = FindAnyObjectByType<Inventory>();
     }
 
     void Update()
     {
-        if (!nearbyPlot) return;
+        if (nearbyPlot == null) return;
 
         // PLANT (P)
         if (Input.GetKeyDown(KeyCode.P) && nearbyPlot.IsEmpty())
         {
-            var slot = inventory.slots[hotbarUI.SelectedIndex];
-
-            if (slot.item != null && slot.item is FarmItem && slot.item.itemName.Contains("Seed"))
-            {
-                // remove 1 seed
-                slot.count -= 1;
-                if (slot.count <= 0) inventory.ClearSlot(hotbarUI.SelectedIndex);
-
-                // convert "Wheat Seed" → "Wheat"
-                string cropName = slot.item.itemName.Replace(" Seed", "");
-                nearbyPlot.PlantCrop(new Crop(cropName, 2));
-
-                hotbarUI.RefreshAllSlots();  
-            }
+            // Always plant Wheat
+            nearbyPlot.PlantCrop(new Crop("Wheat", 2)); 
+            Debug.Log("Planted Wheat.");
         }
 
         // GROW (G)
         if (Input.GetKeyDown(KeyCode.G) && !nearbyPlot.IsEmpty())
+        {
             nearbyPlot.GrowCrop();
+            Debug.Log("Crop has grown.");
+        }
 
         // HARVEST (H)
         if (Input.GetKeyDown(KeyCode.H) && !nearbyPlot.IsEmpty())
@@ -45,24 +34,37 @@ public class PlayerFarming : MonoBehaviour
             Crop harvested = nearbyPlot.HarvestCrop();
             if (harvested != null)
             {
+                // Add harvested item
                 var connector = FindAnyObjectByType<FarmingInventoryConnector>();
                 if (connector != null)
                     connector.AddCropToInventory(harvested.cropName);
 
-                hotbarUI.RefreshAllSlots();
+                Debug.Log("Harvested and added to inventory.");
             }
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Plot"))
-            nearbyPlot = other.GetComponent<Plot>();
-    }
+   private void OnTriggerEnter2D(Collider2D other)
+{
+    Debug.Log("Triggered with: " + other.name);
 
-    private void OnTriggerExit2D(Collider2D other)
+    if (other.CompareTag("Plot"))
     {
-        if (other.CompareTag("Plot"))
-            nearbyPlot = null;
+        nearbyPlot = other.GetComponent<Plot>();
+        Debug.Log("Player is near a plot!");
     }
 }
+
+private void OnTriggerExit2D(Collider2D other)
+{
+    Debug.Log("Stopped triggering with: " + other.name);
+
+    if (other.CompareTag("Plot"))
+    {
+        nearbyPlot = null;
+        Debug.Log("Player left the plot.");
+    }
+}
+
+}
+

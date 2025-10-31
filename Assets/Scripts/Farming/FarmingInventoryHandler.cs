@@ -20,7 +20,6 @@ public class FarmingInventoryHandler : MonoBehaviour
 
     void Awake()
     {
-        // Initialize empty slots
         for (int i = 0; i < capacity; i++)
         {
             slots.Add(new FarmSlot());
@@ -36,7 +35,6 @@ public class FarmingInventoryHandler : MonoBehaviour
             return;
         }
 
-        // Try stacking first
         foreach (var slot in slots)
         {
             if (slot.item == cropToAdd && slot.count < cropToAdd.maxStack)
@@ -47,7 +45,6 @@ public class FarmingInventoryHandler : MonoBehaviour
             }
         }
 
-        // Try adding to empty slot
         foreach (var slot in slots)
         {
             if (slot.item == null)

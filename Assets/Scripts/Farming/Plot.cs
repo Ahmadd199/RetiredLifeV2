@@ -28,7 +28,7 @@ public class Plot : MonoBehaviour
         }
         else
         {
-            cropRenderer.sprite = null; // Start empty
+            cropRenderer.sprite = null; 
         }
     }
 

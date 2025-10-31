@@ -10,11 +10,10 @@ public enum CropState
 public class Crop
 {
     public string cropName;
-    public int growthTime; // number of days or growth ticks
+    public int growthTime; 
     public int currentGrowth;
     public CropState state;
 
-    // Constructor
     public Crop(string name, int growthTime)
     {
         cropName = name;
@@ -23,7 +22,6 @@ public class Crop
         state = CropState.Seed;
     }
 
-    // Call this to advance growth
     public void Grow()
     {
         if (state == CropState.Seed || state == CropState.Growing)
@@ -40,7 +38,6 @@ public class Crop
         }
     }
 
-    // Attempt to harvest the crop
     public bool Harvest()
     {
         if (state == CropState.ReadyToHarvest)
